@@ -2,12 +2,13 @@
 /*
  * mfcc_adaboost.h
  *
- *  Created on: Feb 23, 2016
+ *  Created on: Feb 24, 2016
  *      Author: puff
  */
 
 #ifndef MFCC_ADABOOST_H_
 #define MFCC_ADABOOST_H_
+
 #include <stdio.h>
 #include <math.h>
 //定义bool结 构
@@ -22,12 +23,12 @@ typedef struct weakclassifiers{
  #define    ipframesize             256
  #define    fftcoef                 512
  #define    PI                      3.1415926
- #define    TPI                     (2*3.1415926)
+ #define    TTPI                    (2*3.1415926)
 
 
  #define    windowsize              30
  #define    rightrate               0.2
- #define    weakclassifier_num      1000
+ #define    weakclassifier_num      5
 extern float fbank[27];
 extern float c[13];
 extern float En;
@@ -58,6 +59,9 @@ void GetFrame_Result(float* mfcc_feature,model* model_var);
 void GetMfcc(short *buffer,int len,model *model);
 model * GetModel(char* modelfile);
 //void GiveVoice(unsigned char *data,int idx,int len);
+
+
+//unsigned long long GetNTime(void);
 
 
 

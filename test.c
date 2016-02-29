@@ -1,9 +1,11 @@
 /*
+/*
  * test.c
  *
- *  Created on: Feb 23, 2016
+ *  Created on: Feb 24, 2016
  *      Author: puff
  */
+
 
 #include<stdio.h>
 #include<string.h>
@@ -14,8 +16,8 @@
 
 void main()
  {
-
-	char* wavfile="alaska.wav";
+	//long long time_start = GetNTime();
+	char* wavfile="alaska2.wav";
 	char* modelfile="train.txt_1000.model";
 	short wavdata[ipframesize];
 
@@ -26,18 +28,25 @@ void main()
 	FILE *sourcefile;
 	sourcefile=fopen(wavfile,"rb");
 	fread(&waveheader,sizeof(struct _TWavHeader),1,sourcefile);
+	 //long long time_while = GetNTime();
 	while(fread(wavdata,sizeof(short),ipframesize,sourcefile)==ipframesize)
 	{
-
-		GetMfcc(wavdata,ipframesize,model_var);
+	 //fread(wavdata,sizeof(short),ipframesize,sourcefile);
+		GetMfcc(wavdata,ipframesize,model_var);//############################################
 		//GetFrame_Result(mfcc_feature,model_var);//############################################
 
 
 	 //fseek(sourcefile,offset,SEEK_CUR);
 	}//离开while loop
-
+	 //long long time_finalresult = GetNTime();
   int label= GetFinal_Result();//############################################
- printf("result is %d",label);
+
+ printf("result is %d\n",label);
+ //long long time_end = GetNTime();
+ //printf( "all time is %qi\n",time_end-time_start );
+ //printf( "finalresult time is %qi\n",time_end-time_finalresult );
+ //printf( "time_while time is %qi\n",time_while-time_finalresult );
+
  }
 
 
@@ -56,3 +65,10 @@ model * GetModel(char* modelfile)
 	fclose(f);
 	return model_var;
 }
+/*
+inline unsigned long long GetNTime()
+{
+       __asm ("RDTSC");
+}
+
+*/
